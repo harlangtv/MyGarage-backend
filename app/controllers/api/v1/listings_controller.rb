@@ -5,6 +5,11 @@ class Api::V1::ListingsController < ApplicationController
     render json: @lsitings, status: :ok
   end
 
+  def show
+    @listing = Listing.find(params[:id])
+    render json: @listing, status: 200
+  end
+
   def create
     listing = Listing.create(listing_params)
     render json: listing, status: 201

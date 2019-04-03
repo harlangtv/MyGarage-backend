@@ -5,6 +5,11 @@ class Api::V1::AuctionsController < ApplicationController
     render json: @auctions, status: 200
   end
 
+  def show
+    @auction = Auction.find(params[:id])
+    render json: @auction, status: 200
+  end
+
   def create
     auction = Auction.create(auction_params)
     render json: listing, status: 201
