@@ -7,7 +7,6 @@ class CreateListings < ActiveRecord::Migration[5.2]
       t.integer :vehicle_year
       t.integer :mileage
       t.integer :vehicle_zip_code
-      t.text :images
       t.string :transmission
       t.text :vehicle_description
 

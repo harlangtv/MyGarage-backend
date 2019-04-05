@@ -1,18 +1,35 @@
 class Api::V1::ListingsController < ApplicationController
+  # before_action :set_storage_url, except: [:destroy]
 
   def index
     @listings = Listing.all
     render json: @lsitings, status: :ok
   end
 
-  def show
-    @listing = Listing.find(params[:id])
-    render json: @listing, status: 200
+  def create
+    @listing = Listing.create(listing_params)
+    render json: {
+      vehicle_make: @listing.vehicle_make,
+      vehicle_model: @listing.vehicle_model,
+      vehicle_year: @listing.vehicle_year,
+      mileage: @listing.mileage,
+      vehicle_zip_code: @listing.vehicle_zip_code,
+      transmission: @listing.transmission,
+      vehicle_description: @listing.vehicle_description,
+    }
   end
 
-  def create
-    listing = Listing.create(listing_params)
-    render json: listing, status: 201
+  def show
+    @listing = Listing.find(params[:id])
+    render json: {
+      vehicle_make: @listing.vehicle_make,
+      vehicle_model: @listing.vehicle_model,
+      vehicle_year: @listing.vehicle_year,
+      mileage: @listing.mileage,
+      vehicle_zip_code: @listing.vehicle_zip_code,
+      transmission: @listing.transmission,
+      vehicle_description: @listing.vehicle_description,
+    }
   end
 
   def update
@@ -28,10 +45,7 @@ class Api::V1::ListingsController < ApplicationController
 
   private
   def listing_params
-    params.permit(:user_id, :vehicle_make, :vehicle_model, :vehicle_year, :mileage, :vehicle_zip_code, :images, :transmission, :vehicle_description)
+    params.permit(:vehicle_make, :vehicle_model, :vehicle_year, :country, :mileage, :vehicle_zip_code, :transmission, :vehicle_description)
   end
 
-  def set_listing
-    @listing = Listing.find(params[:id])
-  end
 end
