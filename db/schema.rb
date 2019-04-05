@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2019_04_05_183534) do
     t.string "vehicle_make"
     t.string "vehicle_model"
     t.integer "vehicle_year"
-    t.string "country"
     t.integer "mileage"
     t.integer "vehicle_zip_code"
     t.string "transmission"
