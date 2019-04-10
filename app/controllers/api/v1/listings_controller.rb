@@ -1,5 +1,4 @@
 class Api::V1::ListingsController < ApplicationController
-  # before_action :set_storage_url, except: [:destroy]
 
   def index
     @listings = Listing.all
@@ -8,6 +7,7 @@ class Api::V1::ListingsController < ApplicationController
 
   def create
     @listing = Listing.create(listing_params)
+    @post.images.build
     render json: @listing
   end
 
@@ -31,5 +31,7 @@ class Api::V1::ListingsController < ApplicationController
   def listing_params
     params.permit(:user_id, :vehicle_make, :vehicle_model, :vehicle_year, :country, :mileage, :vehicle_zip_code, :transmission, :vehicle_description)
   end
+
+
 
 end
