@@ -7,16 +7,8 @@ class Api::V1::ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-    # byebug
-    # @image = Image.new(params[:images])
-    # byebug
       if @listing.save
         render json: @listing, status: 200
-    # Step 1: Create a new listing
-
-    # Step 2: Create a new image associated with the newly created listing
-
-    # Step 3: Persist both to the database and render JSON of the listing
     end
   end
 
