@@ -10,6 +10,20 @@ class Api::V1::ImagesController < ApplicationController
    render json: @image
  end
 
+ def create
+   @image = Image.new(image_params)
+   # byebug
+   # @image = Image.new(params[:images])
+     if @image.save
+       render json: @image, status: 200
+   # Step 1: Create a new listing
+
+   # Step 2: Create a new image associated with the newly created listing
+
+   # Step 3: Persist both to the database and render JSON of the listing
+   end
+ end
+
  def update
    @image.update(image_params)
    if @image.save
@@ -21,8 +35,8 @@ class Api::V1::ImagesController < ApplicationController
 
  private
 
- def note_params
-   params.permit(:image_url)
+ def image_params
+   params.permit(:listing_id, :image_url)
  end
 
  def find_image

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :auctions
       resources :bids
       resources :comments
-      resources :images, only: [:index, :show, :update]
+      resources :images
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
