@@ -20,9 +20,7 @@ class Api::V1::ImagesController < ApplicationController
  def update
    @image.update(image_params)
    if @image.save
-     render json: @image, status: :accepted
-   else
-     render json: { errors: @image.errors.full_messages }, status: :unprocessible_entity
+     render json: @image.listing, status: 200
    end
  end
 
