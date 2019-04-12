@@ -11,14 +11,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    render json: user, status: 201
+    @user = User.new(user_params)
+    if @user.save
+      jwt = encode_token({user_id: @user.id})
+      render json: {user: UserSerializer.new(@user), jwt: jwt}
+    else
+      render json: { errors: @user.errors.full_messages}, status: :unprocessible_entity
+    end
   end
 
-  def update
-    @user.update(user_params)
-    render json: @user, status: 200
-  end
 
   def destroy
     userId = @user.id
@@ -28,7 +29,7 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:first_name, :last_name, :username, :email, :state, :city, :zipcode)
+    params.permit(:first_name, :last_name, :username, :password)
   end
 
   def set_user
