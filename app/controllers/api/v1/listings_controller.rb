@@ -1,4 +1,5 @@
 class Api::V1::ListingsController < ApplicationController
+  before_action :find_listing, only: [:show, :update]
 
   def index
     @listings = Listing.all
@@ -13,13 +14,14 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
     render json: @listing, include: :user
   end
 
   def update
     @listing.update(listing_params)
-    render json: @listing, status: 200
+      if @listing.save
+        render json: @listing, status: 200
+      end
   end
 
   def destroy
@@ -33,6 +35,9 @@ class Api::V1::ListingsController < ApplicationController
     params.require(:listing).permit(:user_id, :vehicle_make, :vehicle_model, :vehicle_year, :mileage, :vehicle_zip_code, :transmission, :vehicle_description)
   end
 
+  def find_listing
+    @listing = Listing.find(params[:id])
+  end
 
 
 end
