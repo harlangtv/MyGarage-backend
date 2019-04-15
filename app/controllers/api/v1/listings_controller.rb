@@ -1,5 +1,5 @@
 class Api::V1::ListingsController < ApplicationController
-  before_action :find_listing, only: [:show, :update]
+  before_action :find_listing, only: [:show, :update, :destroy]
 
   def index
     @listings = Listing.all
