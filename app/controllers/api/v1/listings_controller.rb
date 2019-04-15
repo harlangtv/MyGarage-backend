@@ -14,7 +14,7 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def show
-    render json: @listing, include: :user
+    render json: @listing
   end
 
   def update
